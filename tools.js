@@ -51,7 +51,7 @@ pencil.addEventListener("click", (e) => {
 
 eraser.addEventListener("click", (e) => {
     eraserFlag = !eraserFlag
-    if (eraserFlag) eraserToolCont.style.display = "block"
+    if (eraserFlag) eraserToolCont.style.display = "flex"
     else eraserToolCont.style.display = "none"
 })
 
