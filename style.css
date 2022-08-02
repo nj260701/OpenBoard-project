@@ -123,7 +123,9 @@ body {
     left:34vw;
     display: none;
 
+
 }
+
 
 .eraser-tool-cont input{
     width: 80%;
@@ -179,4 +181,8 @@ textarea{
 img{
     height: 100%;
     width: 100%;
+}
+
+canvas{
+    background-color: white;
 }
