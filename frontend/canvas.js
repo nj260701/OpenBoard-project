@@ -23,6 +23,9 @@ mouseDown = false
 //API
 let tool = canvas.getContext("2d");
 
+tool.fillStyle = "white";
+tool.fillRect(0, 0, canvas.width, canvas.height);
+
 // Prerequestie of Canva API
 
 // tool.strokeStyle = "yellow"; //fill desired color
@@ -32,6 +35,7 @@ let tool = canvas.getContext("2d");
 // tool.moveTo(10,10); //starting point
 // tool.lineTo(1000,500); //ending point
 // tool.stroke(); //fill color
+
 
 tool.strokeStyle = pencilColor;
 tool.lineWidth = pencilWidth;
@@ -60,7 +64,9 @@ canvas.addEventListener("mousemove", (e) => {
     if (mouseDown) {
         let data = {
             x: e.clientX,
-            y: e.clientY
+            y: e.clientY,
+            color: eraserFlag ? eraserColor : pencilColor,
+            width: eraserFlag ? eraserWidth : pencilWidth
         }
         socket.emit("drawStroke", data);
     }
@@ -73,13 +79,6 @@ canvas.addEventListener("mouseup", (e) => {
     let url = canvas.toDataURL();
     undoRedoTracker.push(url);
     track = undoRedoTracker.length - 1;
-
-    let trackObj = {
-        trackValue: track,
-        undoRedoTracker
-    }
-
-    undoRedoCanvas(trackObj);
 })
 
 undo.addEventListener("click", (e) => {
@@ -131,16 +130,19 @@ function beginPath(strokeObj) {
 }
 
 function drawStroke(strokeObj) {
+    tool.strokeStyle = strokeObj.color;
+    tool.lineWidth = strokeObj.width
     tool.lineTo(strokeObj.x, strokeObj.y);
     tool.stroke();
 }
+
 
 pencilColorEle.forEach((colorElem) => {
     colorElem.addEventListener("click", (e) => {
         let color = colorElem.classList[0];
         pencilColor = color;
         tool.strokeStyle = pencilColor;
-        tool.lineWidth = pencilWidth
+        // tool.lineWidth = pencilWidth
     })
 
 })
@@ -148,13 +150,13 @@ pencilColorEle.forEach((colorElem) => {
 pencilWidthEle.addEventListener("change", (e) => {
     pencilWidth = pencilWidthEle.value;
     tool.lineWidth = pencilWidth
-    tool.strokeStyle = pencilColor
+    // tool.strokeStyle = pencilColor
 })
 
 eraserWidthEle.addEventListener("change", (e) => {
     eraserWidth = eraserWidthEle.value;
     tool.lineWidth = eraserWidth;
-    tool.strokeStyle = eraserColor;
+    // tool.strokeStyle = eraserColor;
 })
 
 eraser.addEventListener("click", (e) => {
@@ -169,6 +171,7 @@ eraser.addEventListener("click", (e) => {
 
 download.addEventListener("click", (e) => {
     let url = canvas.toDataURL();
+    
     let a = document.createElement("a");
     a.href = url;
     a.download = "openBoard.jpg";
@@ -176,12 +179,12 @@ download.addEventListener("click", (e) => {
 })
 
 
-
+     
 socket.on("beginPath", (data) => {
     //data = data from server
     beginPath(data);
 })
-
+ 
 socket.on("drawStroke", (data) => {
     drawStroke(data);
 })

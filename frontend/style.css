@@ -122,7 +122,7 @@ body {
     align-items: center;
     position: absolute;
     top: 8rem;
-    left:34vw;
+    left:34.5vw;
     display: none;
 
 
@@ -139,8 +139,9 @@ body {
     position: absolute;
     top:15rem;
     left:10rem;
-    background-color: #f1f2f6;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    
+    
+   
 
 }
 
@@ -150,8 +151,8 @@ body {
     justify-content: flex-end;
     align-items: center;
     background-color: #f1f2f6;
-   
-
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    
 }
 
 .header-cont > *{
@@ -159,6 +160,7 @@ body {
     width:1.3rem;
     margin-right:0.5rem;
     border-radius: 50%;
+  
 }
 
 .minimize{
@@ -169,9 +171,12 @@ body {
     background-color: #ff4757;
 }
 
-.note-cont{
+.note-container{
     height:calc(100% - 2rem);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; 
+    border:solid grey 1px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    
+    
 }
 
 textarea{
@@ -189,5 +194,4 @@ img{
 
 canvas{
     background-color: white;
-    
 }

@@ -38,6 +38,7 @@ function closeTools() {
     iconEle.classList.remove("fa-times");
     iconEle.classList.add("fa-bars");
     toolsCont.style.display = "none";
+
     pencilToolCont.style.display = "none";
     eraserToolCont.style.display = "none";
 }
@@ -73,7 +74,7 @@ upload.addEventListener("click", (e) => {
             <div class="minimize"></div>
             <div class="remove"></div>
         </div>
-        <div class="note-cont">
+        <div class="note-container">
             <img src="${url}"/>
         </div>
         `;
@@ -90,7 +91,7 @@ sticky.addEventListener("click", (e) => {
         <div class="minimize"></div>
         <div class="remove"></div>
     </div>
-    <div class="note-cont">
+    <div class="note-container">
         <textarea spellcheck="false"></textarea>
     </div>
     `;
@@ -125,7 +126,7 @@ function noteActions(minimize, remove, element) {
     })
 
     minimize.addEventListener("click", (e) => {
-        let noteCont = element.querySelector(".note-cont");
+        let noteCont = element.querySelector(".note-container");
         let display = getComputedStyle(noteCont).getPropertyValue("display");
         if (display === "none") noteCont.style.display = "block";
         else noteCont.style.display = "none";
